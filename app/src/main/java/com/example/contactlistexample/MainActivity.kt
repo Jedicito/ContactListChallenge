@@ -1,15 +1,17 @@
 package com.example.contactlistexample
 
 import android.os.Bundle
+import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
-import androidx.activity.enableEdgeToEdge
+import android.widget.Switch
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.contactlistexample.adapter.ContactAdapter
 import com.example.contactlistexample.data.Contact
+import com.google.android.material.materialswitch.MaterialSwitch
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,8 +22,47 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+
         // Form elements find
-       // val etName = findViewById<EditText>(R.id.etName)
+        val etName = findViewById<EditText>(R.id.etName)
+        val etPhone = findViewById<EditText>(R.id.etPhone)
+        val etStatus = findViewById<CheckBox>(R.id.etStatus)
+
+
+        val btnAgregar = findViewById<Button>(R.id.btnAgregar)
+        val  btnFiltrarDisponibles = findViewById<Button>(R.id.btnFiltroDisponibles)
+
+        btnAgregar.setOnClickListener{
+            contactList.add(Contact(
+                nombre = etName.text.toString(),
+                fono = etPhone.text.toString(),
+                estado = etStatus.isChecked
+            ))
+
+/*            Toast.makeText(
+                this,
+                "Agrega ${etName.text}",
+                Toast.LENGTH_LONG
+            ).show()*/
+
+            setRecyclerViewAdapter(contactList)
+        }
+
+        btnFiltrarDisponibles.setOnClickListener {
+            val contactosFiltrados = contactList.filter { it.isAvailable }
+            setRecyclerViewAdapter(contactosFiltrados)
+        }
+
+        val estaDisponible = findViewById<MaterialSwitch>(R.id.estaDisponible)
+        estaDisponible.setOnCheckedChangeListener { compoundButton, isChecked ->
+            if (isChecked) {
+                val contactosFiltrados = contactList.filter { it.isAvailable }
+                setRecyclerViewAdapter(contactosFiltrados)
+            }else{
+                setRecyclerViewAdapter(contactList)
+            }
+        }
 
     }
 

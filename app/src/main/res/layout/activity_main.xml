@@ -12,11 +12,51 @@
         android:id="@+id/etName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Enter name"
+        android:layout_margin="16dp"
+        android:hint="Ingrese nombre"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etPhone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:hint="Ingrese telefono"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etName" />
+
+    <CheckBox
+        android:id="@+id/etStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Disponible"
+        android:layout_marginRight="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etPhone" />
+
+    <Button
+        android:id="@+id/btnAgregar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="Registrar Contacto"
+        android:text="Registrar usuario"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="16dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/etStatus" />
+
+    <Button
+        android:id="@+id/btnFiltroDisponibles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Filtrar disponibles"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnAgregar" />
 
     <!-- add the rest of the fields -->
 
@@ -25,11 +65,10 @@
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etName"
         app:layout_constraintBottom_toBottomOf="parent"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/estaDisponible" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAddContact"
@@ -40,5 +79,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="16dp"
         app:srcCompat="@android:drawable/ic_input_add"/>
+
+    <com.google.android.material.materialswitch.MaterialSwitch
+        android:id="@+id/estaDisponible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:text="Disponible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnFiltroDisponibles" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
