@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
-import android.widget.Switch
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.contactlistexample.adapter.ContactAdapter
 import com.example.contactlistexample.data.Contact
 import com.google.android.material.materialswitch.MaterialSwitch
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,19 +34,30 @@ class MainActivity : AppCompatActivity() {
         val  btnFiltrarDisponibles = findViewById<Button>(R.id.btnFiltroDisponibles)
 
         btnAgregar.setOnClickListener{
-            contactList.add(Contact(
-                nombre = etName.text.toString(),
-                fono = etPhone.text.toString(),
-                estado = etStatus.isChecked
-            ))
+            if(!etName.text.isNullOrEmpty() and !etPhone.text.isNullOrEmpty()){
+                contactList.add(Contact(
+                    nombre = etName.text.toString(),
+                    fono = etPhone.text.toString(),
+                    estado = etStatus.isChecked
+                ))
 
-/*            Toast.makeText(
-                this,
-                "Agrega ${etName.text}",
-                Toast.LENGTH_LONG
-            ).show()*/
+    /*            Toast.makeText(
+                    this,
+                    "Agrega ${etName.text}",
+                    Toast.LENGTH_LONG
+                ).show()*/
+                etName.setText("")
+                etPhone.setText("")
+                etStatus.isChecked = false
 
-            setRecyclerViewAdapter(contactList)
+                setRecyclerViewAdapter(contactList)
+            } else {
+                Toast.makeText(
+                    this,
+                    "Falta Nombre o Teléfono",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
         }
 
         btnFiltrarDisponibles.setOnClickListener {
